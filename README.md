@@ -8,12 +8,6 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 [![CI/CD Pipeline](https://github.com/LostFeniks/translit-app/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/LostFeniks/translit-app/actions/workflows/ci.yml)
 
-**Веб-приложение для транслитерации текста с русского на латиницу в реальном времени**
-
-[🌐 Демо](https://lostfeniks.github.io/translit-app/) • [📖 О проекте](#-о-проекте) • [🛠️ Технологии](#-технологии) • [🚀 Установка](#-установка-и-запуск)
-
-</div>
-
 ---
 
 ## 🌐 Демонстрация
