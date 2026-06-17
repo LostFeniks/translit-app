@@ -8,15 +8,18 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 [![CI/CD Pipeline](https://github.com/LostFeniks/translit-app/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/LostFeniks/translit-app/actions/workflows/ci.yml)
 
+</div>
+
 ---
 
 ## 🌐 Демонстрация
 
-**Живая демонстрация проекта доступна по ссылке:**
+**Живая демонстрация проекта доступна по ссылке:**  
 👉 **[https://lostfeniks.github.io/translit-app/](https://lostfeniks.github.io/translit-app/)**
 
 > ⚠️ **Важно:** Демо-версия использует клиентскую транслитерацию (без сервера). Полная функциональность с сохранением истории доступна при локальном запуске.
 
+---
 
 ## 📚 О проекте
 
@@ -75,3 +78,13 @@
 - **GitHub Actions** - CI/CD
 - **GitHub Pages** - хостинг
 - **pytest** - тестирование
+
+---
+
+## 🚀 Установка и запуск
+
+### 1. Клонирование репозитория
+
+```bash
+git clone https://github.com/LostFeniks/translit-app.git
+cd translit-app
