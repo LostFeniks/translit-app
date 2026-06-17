@@ -1,28 +1,129 @@
-name: Deploy to Production
+name: Build and Deploy
 
 on:
   push:
     branches: [ main, master ]
   workflow_dispatch:
 
+# Важно: даем права на запись
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    
-    - name: Deploy to Server
-      uses: appleboy/ssh-action@v0.1.5
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22  # Стандартный порт SSH
-        script: |
-          cd /var/www/translit-app
-          git pull
-          source venv/bin/activate
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
-          sudo systemctl restart translit-app
+          pip install flask flask-cors
+
+      - name: Create static files for GitHub Pages
+        run: |
+          # Создаем папку для статики
+          mkdir -p dist
+          
+          # Копируем статические файлы
+          cp -r static/* dist/ 2>/dev/null || true
+          
+          # Создаем index.html если его нет
+          if [ ! -f "dist/index.html" ]; then
+            echo '<!DOCTYPE html>
+          <html lang="ru">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Транслитерация</title>
+              <style>
+                  body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+                  .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                  h1 { color: #333; text-align: center; }
+                  .input-group { margin-bottom: 20px; }
+                  label { display: block; margin-bottom: 5px; color: #555; font-weight: bold; }
+                  input { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px; }
+                  input:focus { border-color: #667eea; outline: none; }
+                  .result { background: #f7f7f7; padding: 10px; border-radius: 5px; min-height: 40px; border: 2px solid #ddd; }
+                  .result:empty::before { content: "Транслитерация появится здесь"; color: #999; font-style: italic; }
+                  button { width: 100%; padding: 12px; background: #667eea; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+                  button:hover { background: #5a67d8; }
+                  #history { margin-top: 20px; padding: 10px; background: #f7f7f7; border-radius: 5px; display: none; }
+                  #history.active { display: block; }
+                  .history-item { padding: 5px 0; border-bottom: 1px solid #ddd; }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>🔄 Транслитератор</h1>
+                  <div class="input-group">
+                      <label for="original">Введите текст на русском:</label>
+                      <input type="text" id="original" placeholder="Например: вода" autofocus>
+                  </div>
+                  <div class="input-group">
+                      <label for="translit">Транслитерация:</label>
+                      <div id="translit" class="result"></div>
+                  </div>
+                  <button onclick="showHistory()">📜 Показать историю</button>
+                  <div id="history"></div>
+              </div>
+              <script>
+                  const originalInput = document.getElementById("original");
+                  const translitDiv = document.getElementById("translit");
+                  const historyDiv = document.getElementById("history");
+                  let isHistoryOpen = false;
+
+                  originalInput.addEventListener("input", function() {
+                      const text = this.value.trim();
+                      if (!text) {
+                          translitDiv.textContent = "";
+                          return;
+                      }
+                      // Простая транслитерация на клиенте
+                      const map = {
+                          "а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "yo",
+                          "ж": "zh", "з": "z", "и": "i", "й": "y", "к": "k", "л": "l", "м": "m",
+                          "н": "n", "о": "o", "п": "p", "р": "r", "с": "s", "т": "t", "у": "u",
+                          "ф": "f", "х": "kh", "ц": "ts", "ч": "ch", "ш": "sh", "щ": "shch",
+                          "ъ": "", "ы": "y", "ь": "", "э": "e", "ю": "yu", "я": "ya",
+                          "А": "A", "Б": "B", "В": "V", "Г": "G", "Д": "D", "Е": "E", "Ё": "Yo"
+                      };
+                      const result = text.split("").map(c => map[c] || c).join("");
+                      translitDiv.textContent = result;
+                  });
+
+                  function showHistory() {
+                      isHistoryOpen = !isHistoryOpen;
+                      if (isHistoryOpen) {
+                          historyDiv.classList.add("active");
+                          historyDiv.innerHTML = "<div style=\"text-align: center; color: #999;\">История сохраняется на сервере</div>";
+                      } else {
+                          historyDiv.classList.remove("active");
+                          historyDiv.innerHTML = "";
+                      }
+                  }
+              </script>
+          </body>
+          </html>' > dist/index.html
+          fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy to GitHub Pages'
