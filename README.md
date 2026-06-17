@@ -6,22 +6,24 @@
 ![Flask](https://img.shields.io/badge/Flask-3.0.0-green)
 ![SQLite](https://img.shields.io/badge/SQLite-3-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-[![CI/CD Pipeline](https://github.com/LostFeniks/translit-app/actions/workflows/ci.yml/badge.svg)](https://github.com/LostFeniks/translit-app/actions/workflows/ci.yml)
+[![CI/CD Pipeline](https://github.com/LostFeniks/translit-app/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/LostFeniks/translit-app/actions/workflows/ci.yml)
 
 **Веб-приложение для транслитерации текста с русского на латиницу в реальном времени**
 
-[🚀 Демо](#-демонстрация) • [📖 О проекте](#-о-проекте) • [🛠️ Технологии](#-технологии) • [🚀 Установка](#-установка-и-запуск)
+[🌐 Демо](https://lostfeniks.github.io/translit-app/) • [📖 О проекте](#-о-проекте) • [🛠️ Технологии](#-технологии) • [🚀 Установка](#-установка-и-запуск)
 
 </div>
 
 ---
 
-## 📺 Демонстрация
+## 🌐 Демонстрация
 
-### Главная страница
-![Главная страница](https://via.placeholder.com/800x400/667eea/ffffff?text=Translit+App+-+Main+Page)
+**Живая демонстрация проекта доступна по ссылке:**
+👉 **[https://lostfeniks.github.io/translit-app/](https://lostfeniks.github.io/translit-app/)**
 
-### Работа приложения в браузере
+> ⚠️ **Важно:** Демо-версия использует клиентскую транслитерацию (без сервера). Полная функциональность с сохранением истории доступна при локальном запуске.
+
+### Скриншоты
 
 <table>
 <tr>
@@ -53,19 +55,71 @@
 </td>
 <td width="50%">
 
-#### 4. API запросы
-Работа через curl/Postman
+#### 4. Адаптивный дизайн
+Работает на всех устройствах
 
-![API](https://via.placeholder.com/400x200/9C27B0/ffffff?text=REST+API)
+![Адаптивность](https://via.placeholder.com/400x200/9C27B0/ffffff?text=Mobile+Ready)
 
 </td>
 </tr>
 </table>
 
-### Демонстрация API
+---
 
-**Запрос:**
-```bash
-curl -X POST http://localhost:8080/api \
-  -H "Content-Type: application/json" \
-  -d '{"data": "апишка"}'
+## 📚 О проекте
+
+Это **учебный проект**, созданный для изучения веб-разработки на Python. Проект демонстрирует:
+
+- ✅ Создание веб-приложения на **Flask**
+- ✅ Работу с **REST API**
+- ✅ Взаимодействие с **SQLite** базой данных
+- ✅ Динамическое обновление страницы без перезагрузки (**AJAX**)
+- ✅ Асинхронные запросы на **JavaScript**
+- ✅ Организацию проекта с разделением на модули
+- ✅ **CI/CD** через GitHub Actions
+- ✅ **Деплой** на GitHub Pages
+
+---
+
+## 🎯 Функциональность
+
+### 1. Веб-интерфейс
+- **Поле ввода** - для текста на русском
+- **Поле вывода** - автоматическая транслитерация
+- **История** - просмотр последних 10 переводов
+- **Адаптивный дизайн** - работает на всех устройствах
+
+### 2. REST API
+| Endpoint | Метод | Описание |
+|----------|-------|----------|
+| `/api` | POST | Транслитерация текста |
+| `/history` | GET | Получение истории |
+| `/health` | GET | Проверка состояния |
+| `/clear` | POST | Очистка истории |
+
+### 3. База данных
+- Все запросы сохраняются в **SQLite**
+- Автоматическое создание таблиц
+- Индексы для быстрого поиска
+- Хранение в папке пользователя
+
+---
+
+## 🛠️ Технологии
+
+### Backend
+- **Python 3.9+** - язык программирования
+- **Flask 3.0.0** - веб-фреймворк
+- **SQLite** - встроенная база данных
+- **Flask-CORS** - поддержка кросс-доменных запросов
+
+### Frontend
+- **HTML5** - структура страницы
+- **CSS3** - стилизация с градиентами
+- **Vanilla JavaScript** - асинхронные запросы
+
+### DevOps
+- **Git** - контроль версий
+- **GitHub Actions** - CI/CD
+- **GitHub Pages** - хостинг
+- **pytest** - тестирование
