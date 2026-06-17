@@ -1,0 +1,265 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.log
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+translations.db
+db_path.txt
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Project specific
+translit_app_data/
+*.db-shm
+*.db-wal
+
+# Flask
+instance/
+.webassets-cache
+
+# Logs
+logs/
+*.log
+access.log
+error.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# OS
+Thumbs.db
+Desktop.ini
+*.tmp
+*.temp
+
+# Secrets and keys
+*.pem
+*.key
+*.crt
+.env
+.env.local
+.env.*.local
+
+# Deployment
+*.pid
+*.seed
+*.pid.lock
+*.lock
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# mypy
+.mypy_cache/
+
+# pyre
+.pyre/
+
+# pytype
+.pytype/
+
+# Cython
+*.so
+
+# Coverage
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx
+docs/_build
+
+# PyBuilder
+target/
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder
+.spyderproject
+.spyproject
+
+# Rope
+.ropeproject
+
+# mkdocs
+site/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Windows
+*.exe
+*.dll
+*.pdb
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*.pid
+*.lock
+
+# Project specific
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git/
+.mypy_cache/
+.pytest_cache/
+.hypothesis/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# Database files
+translations.db
+translations.db-journal
+db_path.txt
+translit_app_data/
+
+# Static files
+static/
+*.css
+*.js
+*.html
+
+# Test files
+tests/
+test_*.py
+*_test.py
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# IDE specific
+.idea/
+*.iml
+.vscode/
+*.code-workspace
+.settings/
+.project
+.classpath
+.factorypath
