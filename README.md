@@ -80,11 +80,3 @@
 - **pytest** - тестирование
 
 ---
-
-## 🚀 Установка и запуск
-
-### 1. Клонирование репозитория
-
-```bash
-git clone https://github.com/LostFeniks/translit-app.git
-cd translit-app
